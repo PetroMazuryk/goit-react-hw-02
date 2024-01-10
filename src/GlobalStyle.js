@@ -55,7 +55,7 @@ export const GlobalStyle = createGlobalStyle`
         }
         button {
           display: block;
-          margin: 0 auto;
+          // margin: 0 auto;
           cursor: pointer;
           border: none;
         }
