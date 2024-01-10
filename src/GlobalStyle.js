@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
 
           font-weight: normal;
           font-size: 12px;
-   padding-left: 100px;
+ 
     /* background-color: aqua; */
     background-color: #e9e9e9;
   }
@@ -33,10 +33,8 @@ export const GlobalStyle = createGlobalStyle`
         h5,
         h6,
         p {
-          margin: 200px;
+          margin: 0;
           padding: 0;
-          color: red;
-          font-size: 40px;
         }
         img {
           display: block;

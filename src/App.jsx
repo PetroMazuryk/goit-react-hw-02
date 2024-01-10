@@ -1,9 +1,8 @@
-import { GlobalStyle } from "./GlobalStyle";
+import { Description } from "./components/Description/Description";
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <p>Click on the Vite and React logos to learn more</p>
+      <Description />
     </>
   );
 }
