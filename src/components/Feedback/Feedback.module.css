@@ -1,0 +1,33 @@
+.feedbackWrapper {
+  width: 860px;
+  margin: 20px auto;
+  padding: 16px;
+  border: 1px solid red;
+}
+
+.statisticList {
+  margin-bottom: 20px;
+}
+.statisticItem {
+  width: 160px;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-shadow: -5px -5px 9px #fff inset, 2px 2px 18px -10px #000 inset;
+}
+
+.statisticText {
+  font-size: 20px;
+  font-weight: bolder;
+  text-transform: uppercase;
+  color: brown;
+  background: #fffbd5;
+  background: -webkit-linear-gradient(to right, #eb5757, #000000);
+  background: linear-gradient(to right, #eb5757, #000000);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.statisticNumber {
+  margin-left: 26px;
+}
