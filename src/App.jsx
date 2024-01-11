@@ -2,6 +2,7 @@ import { Description } from './components/Description/Description';
 import { useState } from 'react';
 import { Options } from './components/Options/Options';
 import { Feedback } from './components/Feedback/Feedback';
+import { Notification } from './components/Notification/Notification';
 
 export const App = () => {
   const [good, setGood] = useState(0);
@@ -29,6 +30,10 @@ export const App = () => {
     }
   };
 
+  const totalFeedback = () => {
+    return good + neutral + bad;
+  };
+
   return (
     <div>
       <Description />
@@ -37,7 +42,11 @@ export const App = () => {
         options={['good', 'neutral', 'bad']}
         onLeaveFeedback={handleClickButton}
       />
-      <Feedback good={good} neutral={neutral} bad={bad} />
+      {totalFeedback() > 0 ? (
+        <Feedback good={good} neutral={neutral} bad={bad} />
+      ) : (
+        <Notification message="No feedback yet"></Notification>
+      )}
     </div>
   );
 };

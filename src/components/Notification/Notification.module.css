@@ -1,0 +1,19 @@
+.messageWrapper {
+  width: 860px;
+  margin: 20px auto;
+  padding: 16px;
+  border: 1px solid red;
+}
+
+.message {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: brown;
+  background: #fffbd5;
+  background: -webkit-linear-gradient(to right, #eb5757, #000000);
+  background: linear-gradient(to right, #eb5757, #000000);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
