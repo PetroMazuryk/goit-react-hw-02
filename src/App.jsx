@@ -25,6 +25,12 @@ export const App = () => {
         setBad(prevState => prevState + 1);
         break;
 
+      case 'reset':
+        setGood(0);
+        setNeutral(0);
+        setBad(0);
+        break;
+
       default:
         throw new Error();
     }
@@ -34,14 +40,22 @@ export const App = () => {
     return good + neutral + bad;
   };
 
+  const resetFeedback = () => {
+    const options = ['good', 'neutral', 'bad', 'reset'];
+
+    if (totalFeedback()) {
+      return options;
+    }
+    if (!totalFeedback()) {
+      return options.splice(0, 3);
+    }
+  };
+
   return (
     <div>
       <Description />
 
-      <Options
-        options={['good', 'neutral', 'bad']}
-        onLeaveFeedback={handleClickButton}
-      />
+      <Options options={resetFeedback()} onLeaveFeedback={handleClickButton} />
       {totalFeedback() > 0 ? (
         <Feedback good={good} neutral={neutral} bad={bad} />
       ) : (
