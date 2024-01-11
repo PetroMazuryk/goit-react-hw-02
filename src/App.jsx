@@ -50,6 +50,12 @@ export const App = () => {
       return options.splice(0, 3);
     }
   };
+  const positiveFeedback = () => {
+    const positivePercentage = Math.round(
+      ((good + neutral) / totalFeedback()) * 100
+    );
+    return positivePercentage;
+  };
 
   return (
     <div>
@@ -57,7 +63,13 @@ export const App = () => {
 
       <Options options={resetFeedback()} onLeaveFeedback={handleClickButton} />
       {totalFeedback() > 0 ? (
-        <Feedback good={good} neutral={neutral} bad={bad} />
+        <Feedback
+          good={good}
+          neutral={neutral}
+          bad={bad}
+          total={totalFeedback()}
+          positive={positiveFeedback()}
+        />
       ) : (
         <Notification message="No feedback yet"></Notification>
       )}

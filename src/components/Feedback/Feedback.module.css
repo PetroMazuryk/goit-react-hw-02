@@ -9,7 +9,7 @@
   margin-bottom: 20px;
 }
 .statisticItem {
-  width: 160px;
+  width: 190px;
   padding: 8px;
   margin-bottom: 10px;
   box-shadow: -5px -5px 9px #fff inset, 2px 2px 18px -10px #000 inset;
@@ -29,5 +29,5 @@
 }
 
 .statisticNumber {
-  margin-left: 26px;
+  margin-left: 12px;
 }
