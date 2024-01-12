@@ -3,6 +3,8 @@
   margin: 20px auto;
   padding: 16px;
   border: 1px solid red;
+  box-shadow: -6px -6px 9px #fff, 11px 11px 21px -8px #000;
+  border-radius: 8px;
 }
 
 .message {

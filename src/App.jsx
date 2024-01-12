@@ -1,3 +1,4 @@
+import css from './App.module.css';
 import { Description } from './components/Description/Description';
 import { useState, useEffect } from 'react';
 import { Options } from './components/Options/Options';
@@ -86,7 +87,7 @@ export const App = () => {
   };
 
   return (
-    <div>
+    <div className={css.appWrapper}>
       <Description />
 
       <Options options={resetFeedback()} onLeaveFeedback={handleClickButton} />
