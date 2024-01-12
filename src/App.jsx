@@ -7,7 +7,7 @@ import { Notification } from './components/Notification/Notification';
 
 export const App = () => {
   const [good, setGood] = useState(() => {
-    const savedClicks = window.localStorage.getItem('good-clicks');
+    const savedClicks = JSON.parse(window.localStorage.getItem('good-clicks'));
     if (savedClicks !== null) {
       return savedClicks;
     }
@@ -15,14 +15,16 @@ export const App = () => {
   });
 
   const [neutral, setNeutral] = useState(() => {
-    const savedClicks = window.localStorage.getItem('neutral-clicks');
+    const savedClicks = JSON.parse(
+      window.localStorage.getItem('neutral-clicks')
+    );
     if (savedClicks !== null) {
       return savedClicks;
     }
     return 0;
   });
   const [bad, setBad] = useState(() => {
-    const savedClicks = window.localStorage.getItem('bad-clicks');
+    const savedClicks = JSON.parse(window.localStorage.getItem('bad-clicks'));
 
     if (savedClicks !== null) {
       return savedClicks;
@@ -64,7 +66,7 @@ export const App = () => {
   };
 
   const totalFeedback = () => {
-    const countTotalFeedback = Number(good) + Number(neutral) + Number(bad);
+    const countTotalFeedback = good + neutral + bad;
 
     return countTotalFeedback;
   };
@@ -81,7 +83,7 @@ export const App = () => {
   };
   const positiveFeedback = () => {
     const positivePercentage = Math.round(
-      ((Number(good) + Number(neutral)) / totalFeedback()) * 100
+      ((good + neutral) / totalFeedback()) * 100
     );
     return positivePercentage;
   };
