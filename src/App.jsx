@@ -1,28 +1,54 @@
 import { Description } from './components/Description/Description';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Options } from './components/Options/Options';
 import { Feedback } from './components/Feedback/Feedback';
 import { Notification } from './components/Notification/Notification';
 
 export const App = () => {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
+  const [good, setGood] = useState(() => {
+    const savedClicks = window.localStorage.getItem('good-clicks');
+    if (savedClicks !== null) {
+      return savedClicks;
+    }
+    return 0;
+  });
+
+  const [neutral, setNeutral] = useState(() => {
+    const savedClicks = window.localStorage.getItem('neutral-clicks');
+    if (savedClicks !== null) {
+      return savedClicks;
+    }
+    return 0;
+  });
+  const [bad, setBad] = useState(() => {
+    const savedClicks = window.localStorage.getItem('bad-clicks');
+
+    if (savedClicks !== null) {
+      return savedClicks;
+    }
+    return 0;
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem('good-clicks', good);
+    window.localStorage.setItem('neutral-clicks', neutral);
+    window.localStorage.setItem('bad-clicks', bad);
+  }, [good, neutral, bad]);
 
   const handleClickButton = e => {
     const option = e.target.name;
 
     switch (option) {
       case 'good':
-        setGood(prevState => prevState + 1);
+        setGood(good + 1);
         break;
 
       case 'neutral':
-        setNeutral(prevState => prevState + 1);
+        setNeutral(neutral + 1);
         break;
 
       case 'bad':
-        setBad(prevState => prevState + 1);
+        setBad(bad + 1);
         break;
 
       case 'reset':
@@ -37,7 +63,9 @@ export const App = () => {
   };
 
   const totalFeedback = () => {
-    return good + neutral + bad;
+    const countTotalFeedback = Number(good) + Number(neutral) + Number(bad);
+
+    return countTotalFeedback;
   };
 
   const resetFeedback = () => {
@@ -52,7 +80,7 @@ export const App = () => {
   };
   const positiveFeedback = () => {
     const positivePercentage = Math.round(
-      ((good + neutral) / totalFeedback()) * 100
+      ((Number(good) + Number(neutral)) / totalFeedback()) * 100
     );
     return positivePercentage;
   };
