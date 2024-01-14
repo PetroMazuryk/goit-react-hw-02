@@ -61,17 +61,16 @@ export const App = () => {
         break;
 
       default:
-        throw new Error();
+        throw new Error(`Unsupported variant prop value - ${option}`);
     }
   };
 
   const totalFeedback = () => {
     const countTotalFeedback = good + neutral + bad;
-
     return countTotalFeedback;
   };
 
-  const resetFeedback = () => {
+  const resetFeedbackButton = () => {
     const options = ['good', 'neutral', 'bad', 'reset'];
 
     if (totalFeedback()) {
@@ -92,7 +91,10 @@ export const App = () => {
     <div className={css.appWrapper}>
       <Description />
 
-      <Options options={resetFeedback()} onLeaveFeedback={handleClickButton} />
+      <Options
+        options={resetFeedbackButton()}
+        onLeaveFeedback={handleClickButton}
+      />
       {totalFeedback() > 0 ? (
         <Feedback
           good={good}
