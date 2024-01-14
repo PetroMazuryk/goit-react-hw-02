@@ -6,58 +6,45 @@ import { Feedback } from './components/Feedback/Feedback';
 import { Notification } from './components/Notification/Notification';
 
 export const App = () => {
-  const [good, setGood] = useState(() => {
-    const savedClicks = JSON.parse(window.localStorage.getItem('good-clicks'));
-    if (savedClicks !== null) {
-      return savedClicks;
-    }
-    return 0;
-  });
+  const initialTypesFeedback = JSON.parse(
+    window.localStorage.getItem('saved-value')
+  ) || {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
 
-  const [neutral, setNeutral] = useState(() => {
-    const savedClicks = JSON.parse(
-      window.localStorage.getItem('neutral-clicks')
-    );
-    if (savedClicks !== null) {
-      return savedClicks;
-    }
-    return 0;
-  });
-  const [bad, setBad] = useState(() => {
-    const savedClicks = JSON.parse(window.localStorage.getItem('bad-clicks'));
-
-    if (savedClicks !== null) {
-      return savedClicks;
-    }
-    return 0;
-  });
+  const [valuesFeedback, setValuesFeedback] = useState(initialTypesFeedback);
 
   useEffect(() => {
-    window.localStorage.setItem('good-clicks', good);
-    window.localStorage.setItem('neutral-clicks', neutral);
-    window.localStorage.setItem('bad-clicks', bad);
-  }, [good, neutral, bad]);
+    window.localStorage.setItem('saved-value', JSON.stringify(valuesFeedback));
+  }, [valuesFeedback]);
+
+  useEffect(() => {
+    window.localStorage.setItem('saved-value', JSON.stringify(valuesFeedback));
+  }, [valuesFeedback]);
 
   const handleClickButton = e => {
     const option = e.target.name;
 
     switch (option) {
       case 'good':
-        setGood(good + 1);
+        setValuesFeedback({ ...valuesFeedback, good: valuesFeedback.good + 1 });
         break;
 
       case 'neutral':
-        setNeutral(neutral + 1);
+        setValuesFeedback({
+          ...valuesFeedback,
+          neutral: valuesFeedback.neutral + 1,
+        });
         break;
 
       case 'bad':
-        setBad(bad + 1);
+        setValuesFeedback({ ...valuesFeedback, bad: valuesFeedback.bad + 1 });
         break;
 
       case 'reset':
-        setGood(0);
-        setNeutral(0);
-        setBad(0);
+        setValuesFeedback({ good: 0, neutral: 0, bad: 0 });
         break;
 
       default:
@@ -66,7 +53,8 @@ export const App = () => {
   };
 
   const totalFeedback = () => {
-    const countTotalFeedback = good + neutral + bad;
+    const countTotalFeedback =
+      valuesFeedback.good + valuesFeedback.neutral + valuesFeedback.bad;
     return countTotalFeedback;
   };
 
@@ -82,7 +70,7 @@ export const App = () => {
   };
   const positiveFeedback = () => {
     const positivePercentage = Math.round(
-      ((good + neutral) / totalFeedback()) * 100
+      ((valuesFeedback.good + valuesFeedback.neutral) / totalFeedback()) * 100
     );
     return positivePercentage;
   };
@@ -97,9 +85,9 @@ export const App = () => {
       />
       {totalFeedback() > 0 ? (
         <Feedback
-          good={good}
-          neutral={neutral}
-          bad={bad}
+          good={valuesFeedback.good}
+          neutral={valuesFeedback.neutral}
+          bad={valuesFeedback.bad}
           total={totalFeedback()}
           positive={positiveFeedback()}
         />
