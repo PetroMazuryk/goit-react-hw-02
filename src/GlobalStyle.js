@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
           font-weight: normal;
           font-size: 12px;
  
-    /* background-color: aqua; */
+ 
     background-color: #e9e9e9;
   }
  
@@ -54,7 +54,7 @@ export const GlobalStyle = createGlobalStyle`
         }
         button {
           display: block;
-          // margin: 0 auto;
+          padding: 0;
           cursor: pointer;
           border: none;
         }

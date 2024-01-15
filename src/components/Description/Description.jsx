@@ -1,9 +1,8 @@
-// import PropTypes from "prop-types";
 import {
   DescriptionkName,
   DescriptionResponce,
   DescriptionWrapper,
-} from "./Description.styled";
+} from './Description.styled';
 
 export const Description = () => {
   return (
@@ -16,7 +15,3 @@ export const Description = () => {
     </DescriptionWrapper>
   );
 };
-
-// Description.propTypes = {
-//   name: PropTypes.string,
-// };

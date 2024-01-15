@@ -1,6 +1,6 @@
 import css from './Options.module.css';
 
-export const Options = ({ options, onLeaveFeedback }) => {
+export const Options = ({ options, total, onLeaveFeedback, reset }) => {
   return (
     <div className={css.buttonWrapper}>
       <ul className={css.buttonList}>
@@ -9,14 +9,18 @@ export const Options = ({ options, onLeaveFeedback }) => {
             <button
               className={css.button}
               type="button"
-              name={option}
-              onClick={onLeaveFeedback}
+              onClick={() => onLeaveFeedback(option)}
             >
               {option}
             </button>
           </li>
         ))}
       </ul>
+      {total > 0 && (
+        <button onClick={reset} className={css.button}>
+          Reset
+        </button>
+      )}
     </div>
   );
 };

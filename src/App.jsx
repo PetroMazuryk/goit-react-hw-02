@@ -20,36 +20,15 @@ export const App = () => {
     window.localStorage.setItem('saved-value', JSON.stringify(valuesFeedback));
   }, [valuesFeedback]);
 
-  useEffect(() => {
-    window.localStorage.setItem('saved-value', JSON.stringify(valuesFeedback));
-  }, [valuesFeedback]);
+  const handleClickButton = option => {
+    setValuesFeedback({
+      ...valuesFeedback,
+      [option]: valuesFeedback[option] + 1,
+    });
+  };
 
-  const handleClickButton = e => {
-    const option = e.target.name;
-
-    switch (option) {
-      case 'good':
-        setValuesFeedback({ ...valuesFeedback, good: valuesFeedback.good + 1 });
-        break;
-
-      case 'neutral':
-        setValuesFeedback({
-          ...valuesFeedback,
-          neutral: valuesFeedback.neutral + 1,
-        });
-        break;
-
-      case 'bad':
-        setValuesFeedback({ ...valuesFeedback, bad: valuesFeedback.bad + 1 });
-        break;
-
-      case 'reset':
-        setValuesFeedback({ good: 0, neutral: 0, bad: 0 });
-        break;
-
-      default:
-        throw new Error(`Unsupported variant prop value - ${option}`);
-    }
+  const handleClickButtonReset = () => {
+    setValuesFeedback({ good: 0, neutral: 0, bad: 0 });
   };
 
   const totalFeedback = () => {
@@ -58,15 +37,9 @@ export const App = () => {
     return countTotalFeedback;
   };
 
-  const resetFeedbackButton = () => {
-    const options = ['good', 'neutral', 'bad', 'reset'];
-
-    if (totalFeedback()) {
-      return options;
-    }
-    if (!totalFeedback()) {
-      return options.splice(0, 3);
-    }
+  const feedbackButton = () => {
+    const options = ['good', 'neutral', 'bad'];
+    return options;
   };
   const positiveFeedback = () => {
     const positivePercentage = Math.round(
@@ -80,8 +53,10 @@ export const App = () => {
       <Description />
 
       <Options
-        options={resetFeedbackButton()}
+        total={totalFeedback()}
+        options={feedbackButton()}
         onLeaveFeedback={handleClickButton}
+        reset={handleClickButtonReset}
       />
       {totalFeedback() > 0 ? (
         <Feedback
