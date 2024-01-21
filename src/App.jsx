@@ -5,15 +5,18 @@ import { Options } from './components/Options/Options';
 import { Feedback } from './components/Feedback/Feedback';
 import { Notification } from './components/Notification/Notification';
 
-export const App = () => {
-  const initialTypesFeedback = JSON.parse(
-    window.localStorage.getItem('saved-value')
-  ) || {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  };
+const initialTypesFeedback = () => {
+  const savedFeedback = window.localStorage.getItem('saved-value');
+  return savedFeedback !== null
+    ? JSON.parse(savedFeedback)
+    : {
+        good: 0,
+        neutral: 0,
+        bad: 0,
+      };
+};
 
+export const App = () => {
   const [valuesFeedback, setValuesFeedback] = useState(initialTypesFeedback);
 
   useEffect(() => {
@@ -32,8 +35,7 @@ export const App = () => {
   };
 
   const totalFeedback = () => {
-    const countTotalFeedback =
-      valuesFeedback.good + valuesFeedback.neutral + valuesFeedback.bad;
+    const countTotalFeedback = valuesFeedback.good + valuesFeedback.neutral + valuesFeedback.bad;
     return countTotalFeedback;
   };
 
@@ -42,9 +44,7 @@ export const App = () => {
     return options;
   };
   const positiveFeedback = () => {
-    const positivePercentage = Math.round(
-      ((valuesFeedback.good + valuesFeedback.neutral) / totalFeedback()) * 100
-    );
+    const positivePercentage = Math.round(((valuesFeedback.good + valuesFeedback.neutral) / totalFeedback()) * 100);
     return positivePercentage;
   };
 
